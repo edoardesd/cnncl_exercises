@@ -20,6 +20,14 @@ func shredIter(filename string) error{
 
 }
 
+func deleteFile(filename string) error {
+    err := os.Remove(filename)
+    if err != nil {
+        return err
+        }
+    return nil
+}
+
 func shred(filename string) (bool, error) {
     const N_SHRED = 3
 
@@ -29,10 +37,17 @@ func shred(filename string) (bool, error) {
         err := shredIter(filename)
 
         if err != nil {
-            return false, nil
+            return false, err
         }
 
     }
+
+
+    deleteFile(filename)
+    if err != nil {
+            return false, err
+        }
+
     return true, nil
 }
 

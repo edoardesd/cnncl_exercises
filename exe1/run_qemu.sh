@@ -31,4 +31,8 @@ if [ ! -f "$HELLO_EXE" ]; then
 fi
 
 echo "$HELLO_EXE" | cpio -o --format=newc > rootfs
-qemu-system-x86_64 -kernel $KERNEL/$BZIMAGE -initrd rootfs -append "root=/dev/ram rdinit=/$HELLO_EXE"
+qemu-system-x86_64 -kernel $KERNEL/$BZIMAGE \
+                    -initrd rootfs \
+                    -append "root=/dev/ram rdinit=/$HELLO_EXE console=ttyS0" \
+                    -serial stdio \
+                    -display none

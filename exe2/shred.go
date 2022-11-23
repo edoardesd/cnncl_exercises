@@ -1,14 +1,17 @@
 package main
 
 import (
+    "fmt"
     "os"
     "math/rand"
+    "time"
 )
 
 const MAX_BYTES = 2000000
 
 func shred(filename string) (bool, error) {
     randomInt := rand.Intn(MAX_BYTES)
+    fmt.Println("Random length: ", randomInt)
     randomBytes := make([]byte, randomInt)
     rand.Read(randomBytes)
 
@@ -22,6 +25,8 @@ func shred(filename string) (bool, error) {
 }
 
 func main() {
+    rand.Seed(time.Now().UnixNano())
+
     shred("randomfile")
 
 }

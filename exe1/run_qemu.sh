@@ -27,8 +27,8 @@ fi
 if [ ! -f "$HELLO_SOURCE" ]; then
   echo "Creating the hello world c file..."
   touch "$HELLO_SOURCE"
-  echo "#include <stdio.h>" >> "$HELLO_SOURCE"
-  echo "void main() { printf(\"Hello World!\"); while(1); }" >> "$HELLO_SOURCE"
+  printf '#include <stdio.h>\n' > "$HELLO_SOURCE"
+  printf 'void main() { printf("Hello World!\\n"); while(1); }' >> "$HELLO_SOURCE"
 fi
 
 if [ ! -f "$HELLO_EXE" ]; then
@@ -39,6 +39,7 @@ if [ ! -f "$HELLO_EXE" ]; then
 
 fi
 
+if [ -f "$HELLO_EXE" ]; then
 echo "Running the file system!"
 sleep 1
 qemu-system-x86_64 -kernel $KERNEL/$BZIMAGE \
@@ -46,3 +47,4 @@ qemu-system-x86_64 -kernel $KERNEL/$BZIMAGE \
                     -append "root=/dev/ram rdinit=/$HELLO_EXE console=ttyS0" \
                     -serial stdio \
                     -display none
+fi

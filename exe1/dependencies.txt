@@ -1,0 +1,1 @@
+sudo apt install -y make gcc flex bison libelf-dev libssl-dev

@@ -4,7 +4,6 @@ import (
     "fmt"
     "os"
     "math/rand"
-    "time"
 )
 
 /**
@@ -36,11 +35,4 @@ func Shred(filename string) (bool, error) {
     fmt.Println(filename, "shred and deleted.")
 
     return true, nil
-}
-
-func main() {
-    rand.Seed(time.Now().UnixNano())
-
-    Shred("randomfile")
-
 }

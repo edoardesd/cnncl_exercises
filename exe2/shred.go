@@ -43,7 +43,7 @@ func shred(filename string) (bool, error) {
     }
 
 
-    deleteFile(filename)
+    err := deleteFile(filename)
     if err != nil {
             return false, err
         }

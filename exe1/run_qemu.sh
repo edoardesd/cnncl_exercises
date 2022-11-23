@@ -27,6 +27,8 @@ fi
 
 if [ ! -f "$HELLO_EXE" ]; then
   echo "Compiling hello world..."
-  gcc "$HELLO_SOURCE" -o "$HELLO_EXE"
+  gcc -static "$HELLO_SOURCE" -o "$HELLO_EXE"
 fi
 
+echo "$HELLO_EXE" | cpio -o --format=newc > rootfs
+qemu-system-x86_64 -kernel $KERNEL/$BZIMAGE -initrd rootfs -append "root=/dev/ram rdinit=/$HELLO_EXE"

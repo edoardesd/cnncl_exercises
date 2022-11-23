@@ -4,6 +4,7 @@ import (
     "fmt"
     "os"
     "math/rand"
+    "time"
 )
 
 /**
@@ -16,6 +17,8 @@ import (
 func Shred(filename string) (bool, error) {
     const N_SHRED = 3
     const MAX_BYTES = 20000
+    rand.Seed(time.Now().UnixNano())
+
 
     for i := 0; i <N_SHRED; i++ {
         randomInt := rand.Intn(MAX_BYTES) // number of the bytes to overwrite the file

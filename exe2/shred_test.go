@@ -1,17 +1,19 @@
 package main
 
 import (
-    "math/rand"
-    "time"
     "testing"
 )
 
 func TestShred(t *testing.T){
-    rand.Seed(time.Now().UnixNano())
-    got, errorGot := Shred("filename")
+    const name = "random/path"
+    got, err := Shred(name)
     want := true
 
     if got != want {
-        t.Errorf("result %t %t, get %t", got, errorGot, want )
+        t.Errorf("result %t, get %t", got, want )
+    }
+
+    if err != nil {
+        t.Errorf("Unexpected error %s", err)
     }
 }
